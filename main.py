@@ -1,4 +1,4 @@
-from json import load as json_load
+from json import load as json_load, dumps as json_dumps
 from twitter_api import init_twitter_api
 from random import choice as random_quote
 
@@ -33,11 +33,11 @@ def find_quote(data):
 
 
 def quote_used(quote):
-    # checks if quote has already been used, to be implemented
+    used_quote = json_dumps(quote)
     pass
 
 
-def set_quote_used():
+def set_quote_used(quote):
     # adds quote to list of used quotes(json file), to be implemented
     pass
 
