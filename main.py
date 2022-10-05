@@ -1,24 +1,45 @@
 import json
+from twitter_api import init_twitter_api
+import random
 
 
 def main():
-   # parsing json file
+
+    # init access to the twiter account
+    api = init_twitter_api()
+
+   # parsing json data file
     with open("data/quotes.json") as json_file:
         data = json.load(json_file)
 
-    funny_quotes = find_funny_quotes(data)
+    quote = find_quote(data)
 
-    print(funny_quotes)
+    print(quote["Quote"])
+    # line that actually creates the tweet, commented out for now
+    # api.update_status(quote["Quote"])
 
 
-def find_funny_quotes(data):
-    funny_quotes = list()
+def find_quote(data):
 
-    for element in data:
-        if "funny" in element["Tags"]:
-            funny_quotes.append(element)
+    while True:
+        quote = random.choice(data)
 
-    return funny_quotes
+        if len(quote["Quote"]) < 280 and not quote_used(quote):
+            break
+
+    set_quote_used(quote)
+
+    return quote
+
+
+def quote_used(quote):
+    # checks if quote has already been used, to be implemented
+    pass
+
+
+def set_quote_used():
+    # adds quote to list of used quotes(json file), to be implemented
+    pass
 
 
 if __name__ == "__main__":
