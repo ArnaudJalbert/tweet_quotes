@@ -1,28 +1,28 @@
-import json
+from json import load as json_load
 from twitter_api import init_twitter_api
-import random
+from random import choice as random_quote
 
 
 def main():
 
     # init access to the twiter account
-    api = init_twitter_api()
+    twitter = init_twitter_api()
 
    # parsing json data file
     with open("data/quotes.json") as json_file:
-        data = json.load(json_file)
+        data = json_load(json_file)
 
     quote = find_quote(data)
 
     print(quote["Quote"])
     # line that actually creates the tweet, commented out for now
-    # api.update_status(quote["Quote"])
+    # twitter.update_status(quote["Quote"])
 
 
 def find_quote(data):
 
     while True:
-        quote = random.choice(data)
+        quote = random_quote(data)
 
         if len(quote["Quote"]) < 280 and not quote_used(quote):
             break
