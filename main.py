@@ -14,7 +14,7 @@ def main():
 
     quote = find_quote(data)
 
-    print(quote["Quote"])
+    print(f'"{quote["Quote"]}" \n \n - {quote["Author"]}')
     # line that actually creates the tweet, commented out for now
     # twitter.update_status(quote["Quote"])
 
